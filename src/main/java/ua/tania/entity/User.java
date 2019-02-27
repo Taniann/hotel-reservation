@@ -14,7 +14,6 @@ import java.util.List;
 @Entity
 @Table(name = "user")
 public class User implements Serializable {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -28,5 +27,4 @@ public class User implements Serializable {
 
     @OneToMany(mappedBy="user", cascade=CascadeType.ALL, fetch=FetchType.EAGER)
     private List<Order> orders;
-
 }

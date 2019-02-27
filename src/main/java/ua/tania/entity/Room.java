@@ -15,7 +15,6 @@ import java.util.List;
 @Entity
 @Table(name = "room")
 public class Room implements Serializable {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -42,5 +41,4 @@ public class Room implements Serializable {
 
     @OneToMany(mappedBy="room", cascade=CascadeType.ALL, fetch=FetchType.EAGER)
     private List<Order> orders;
-
 }

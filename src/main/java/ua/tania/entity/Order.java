@@ -14,7 +14,6 @@ import java.time.LocalDate;
 @Entity
 @Table(name = "orderr")
 public class Order implements Serializable {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")

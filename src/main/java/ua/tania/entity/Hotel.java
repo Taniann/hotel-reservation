@@ -13,7 +13,6 @@ import java.util.List;
 @Entity
 @Table(name = "hotel")
 public class Hotel implements Serializable {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -27,5 +26,4 @@ public class Hotel implements Serializable {
 
     @OneToMany(mappedBy="hotel", cascade=CascadeType.ALL, fetch=FetchType.EAGER)
     private List<Room> rooms;
-
 }
