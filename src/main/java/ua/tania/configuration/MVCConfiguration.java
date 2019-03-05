@@ -10,32 +10,10 @@ import javax.servlet.Filter;
  * Created by Tania Nebesna on 13.02.2019.
  */
 public class MVCConfiguration extends AbstractAnnotationConfigDispatcherServletInitializer {
-/*    @Override
-    public void onStartup(ServletContext servletContext) throws ServletException {
-        //create the root Spring application context
-        AnnotationConfigWebApplicationContext rootContext = new AnnotationConfigWebApplicationContext();
-        rootContext.register(ApplicationContextConfig.class);
-
-        servletContext.addListener(new ContextLoaderListener(rootContext));
-
-        //Create the dispatcher servlet's Spring application context
-        AnnotationConfigWebApplicationContext servletAppContext = new AnnotationConfigWebApplicationContext();
-        servletAppContext.register(WebConfig.class);
-
-        DispatcherServlet dispatcherServlet = new DispatcherServlet(servletAppContext);
-        // throw NoHandlerFoundException to controller ExceptionHandler.class. Used for <error-page> analogue
-        dispatcherServlet.setThrowExceptionIfNoHandlerFound(true);
-
-        //register and map the dispatcher servlet
-        //note Dispatcher servlet with constructor arguments
-        ServletRegistration.Dynamic dispatcher = servletContext.addServlet("dispatcher", dispatcherServlet);
-        dispatcher.setLoadOnStartup(1);
-        dispatcher.addMapping("/");
-    }*/
 
     @Override
     protected Class<?>[] getRootConfigClasses() {
-        return new Class[] { ApplicationContextConfig.class };
+        return new Class[] { ApplicationContextConfig.class, WebSecurityConfig.class };
     }
 
     @Override

@@ -18,10 +18,10 @@ public class Hotel implements Serializable {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "name")
+    @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "city")
+    @Column(name = "city", nullable = false)
     private String city;
 
     @OneToMany(mappedBy="hotel", cascade=CascadeType.ALL, fetch=FetchType.EAGER)
