@@ -4,6 +4,8 @@ import lombok.Data;
 import ua.tania.entity.Order;
 import ua.tania.entity.Role;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 /**
@@ -11,12 +13,16 @@ import java.util.List;
  */
 @Data
 public class UserDto {
-    private Long id;
-
+    @NotNull
+    @NotEmpty
     private String email;
 
+    @NotNull
+    @NotEmpty
     private String password;
 
+    @NotNull
+    @NotEmpty
     private String confirmedPassword;
 
     private Role role;
