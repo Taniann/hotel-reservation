@@ -1,12 +1,17 @@
 package ua.tania.service;
 
+import ua.tania.dto.HotelDto;
 import ua.tania.entity.Hotel;
+
+import java.util.List;
 
 /**
  * Created by Tania Nebesna on 15.03.2019
  */
 public interface HotelService {
-    void save(Hotel hotel);
+    List<Hotel> findAll();
+
+    void save(HotelDto hotelDto);
 
     void delete(Hotel hotel);
 

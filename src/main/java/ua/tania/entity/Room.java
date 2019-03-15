@@ -34,7 +34,7 @@ public class Room implements Serializable {
     private Hotel hotel;
 
     @Column(name = "is_free")
-    private boolean isFree;
+    private boolean free;
 
     @Column(name = "discount")
     private Integer discount;

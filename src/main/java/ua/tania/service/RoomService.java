@@ -1,5 +1,6 @@
 package ua.tania.service;
 
+import ua.tania.dto.RoomDto;
 import ua.tania.entity.Hotel;
 import ua.tania.entity.Room;
 
@@ -15,6 +16,6 @@ public interface RoomService {
 
     List<Room> findAllByCity(String city);
 
-    void save(Room room);
+    void save(RoomDto roomDto);
 
 }

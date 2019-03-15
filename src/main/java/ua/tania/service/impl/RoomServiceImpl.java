@@ -2,6 +2,7 @@ package ua.tania.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import ua.tania.dto.RoomDto;
 import ua.tania.entity.Hotel;
 import ua.tania.entity.Room;
 import ua.tania.repository.RoomRepository;
@@ -37,7 +38,9 @@ public class RoomServiceImpl implements RoomService {
     }
 
     @Override
-    public void save(Room room) {
+    public void save(RoomDto roomDto) {
+        Room room = new Room();
+
         roomRepository.save(room);
     }
 }

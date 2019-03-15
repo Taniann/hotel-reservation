@@ -27,6 +27,8 @@
                     <ul class="nav navbar-nav">
                         <li><a href="<c:url value="registration"/>">Registration</a></li>
                         <li><a href="<c:url value="login"/>">Log in</a></li>
+                        <li><a href="<c:url value="/admin/addHotel"/>">Add hotel</a></li>
+                        <li><a href="<c:url value="/admin/addRoom"/>">Log in</a></li>
                     </ul>
                 </div>
             </div>
