@@ -52,6 +52,8 @@ public class UserController {
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String login(Model model, String error, String logout) {
+        model.addAttribute("userForm", new UserDto());
+
         if (error != null)
             model.addAttribute("error", "Your username and password are invalid.");
 
@@ -61,9 +63,21 @@ public class UserController {
         return "login";
     }
 
-/*    @RequestMapping(value = {"/welcome"}, method = RequestMethod.GET)
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    public String login(@ModelAttribute("userForm") UserDto userForm, BindingResult bindingResult, Model model) {
+      //  userValidator.validateForLogin(userForm, bindingResult);
+
+        if (bindingResult.hasErrors()) {
+            return "login";
+        }
+
+        securityService.autologin(userForm.getEmail(), userForm.getPassword());
+
+        return "redirect:/welcome";
+    }
+
+    @RequestMapping(value = {"/welcome"}, method = RequestMethod.GET)
     public String welcome(Model model) {
         return "welcome";
-    }*/
-
+    }
 }

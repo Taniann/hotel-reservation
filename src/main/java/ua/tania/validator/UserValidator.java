@@ -1,6 +1,7 @@
 package ua.tania.validator;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
@@ -18,6 +19,9 @@ public class UserValidator implements Validator {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Override
     public boolean supports(Class<?> aClass) {
@@ -43,6 +47,23 @@ public class UserValidator implements Validator {
 
         if (!user.getConfirmedPassword().equals(user.getPassword())) {
             errors.rejectValue("passwordConfirm", "Diff.userForm.passwordConfirm");
+        }
+    }
+
+    public void validateForLogin(Object o, Errors errors) {
+        UserDto userDto = (UserDto) o;
+
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "email", "email is required");
+
+        User user = userService.findByEmail(userDto.getEmail());
+
+        if (user == null) {
+            errors.rejectValue("email", "noSuchUser.userForm.email");
+        }
+
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "password is required");
+        if ((user.getPassword()).equals(userDto.getPassword())) {
+            errors.rejectValue("password", "notSuchPassword.userForm.password");
         }
     }
 }

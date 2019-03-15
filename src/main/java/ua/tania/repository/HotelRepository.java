@@ -10,4 +10,5 @@ import ua.tania.entity.Hotel;
  */
 @Repository
 public interface HotelRepository extends JpaRepository<Hotel, Long> {
+
 }
