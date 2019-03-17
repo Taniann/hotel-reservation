@@ -1,83 +1,47 @@
 package ua.tania.controller;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import ua.tania.dto.UserDto;
-import ua.tania.entity.User;
-import ua.tania.service.SecurityService;
-import ua.tania.service.UserService;
-import ua.tania.validator.UserValidator;
+import ua.tania.dto.OrderDto;
+import ua.tania.service.OrderService;
+import ua.tania.service.RoomService;
 
 /**
- * Created by Tania Nebesna on 05.03.2019
+ * Created by Tania Nebesna on 17.03.2019
  */
 @Controller
+@RequestMapping("/user")
 public class UserController {
     @Autowired
-    private UserService userService;
+    RoomService roomService;
 
     @Autowired
-    private SecurityService securityService;
+    OrderService orderService;
 
-    @Autowired
-    private UserValidator userValidator;
+    @RequestMapping(value = {"/mainPage"}, method = RequestMethod.GET)
+    public String addHotel(Model model) {
+        model.addAttribute("rooms", roomService.findAllAvailable());
 
-    @RequestMapping(value = "/registration", method = RequestMethod.GET)
-    public String registration(Model model) {
-        model.addAttribute("userForm", new UserDto());
-
-        return "registration";
+        return "user/mainPage";
     }
 
-    @RequestMapping(value = "/registration", method = RequestMethod.POST)
-    public String registration(@ModelAttribute("userForm") UserDto userForm, BindingResult bindingResult, Model model) {
-        userValidator.validate(userForm, bindingResult);
 
-        if (bindingResult.hasErrors()) {
-            return "registration";
-        }
+    @RequestMapping(value = {"/orderPage"}, method = RequestMethod.GET)
+    public String addRoom(Model model) {
+        model.addAttribute("orderForm", new OrderDto());
 
-        userService.save(userForm);
-
-        securityService.autologin(userForm.getEmail(), userForm.getPassword());
-
-        return "redirect:/welcome";
+        return "user/orderPage";
     }
 
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public String login(Model model, String error, String logout) {
-        model.addAttribute("userForm", new UserDto());
+    @RequestMapping(value = {"/orderPage"}, method = RequestMethod.POST)
+    public String addHotel(@ModelAttribute("orderForm") OrderDto orderDto, Model model) {
 
-        if (error != null)
-            model.addAttribute("error", "Your username and password are invalid.");
-
-        if (logout != null)
-            model.addAttribute("message", "You have been logged out successfully.");
-
-        return "login";
-    }
-
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public String login(@ModelAttribute("userForm") UserDto userForm, BindingResult bindingResult, Model model) {
-      //  userValidator.validateForLogin(userForm, bindingResult);
-
-        if (bindingResult.hasErrors()) {
-            return "login";
-        }
-
-        securityService.autologin(userForm.getEmail(), userForm.getPassword());
-
-        return "redirect:/welcome";
-    }
-
-    @RequestMapping(value = {"/welcome"}, method = RequestMethod.GET)
-    public String welcome(Model model) {
+        orderService.save(orderDto);
         return "welcome";
     }
+
 }

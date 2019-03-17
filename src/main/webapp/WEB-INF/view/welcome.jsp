@@ -28,7 +28,9 @@
                         <li><a href="<c:url value="registration"/>">Registration</a></li>
                         <li><a href="<c:url value="login"/>">Log in</a></li>
                         <li><a href="<c:url value="/admin/addHotel"/>">Add hotel</a></li>
-                        <li><a href="<c:url value="/admin/addRoom"/>">Log in</a></li>
+                        <li><a href="<c:url value="/admin/addRoom"/>">Add room</a></li>
+                        <li><a href="<c:url value="/user/mainPage"/>">User page</a></li>
+                        <li><a href="<c:url value="/user/orderPage"/>">Make order</a></li>
                     </ul>
                 </div>
             </div>

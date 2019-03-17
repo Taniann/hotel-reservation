@@ -8,6 +8,7 @@ import ua.tania.entity.Room;
 import ua.tania.repository.RoomRepository;
 import ua.tania.service.RoomService;
 
+
 import java.util.List;
 
 /**
@@ -40,6 +41,11 @@ public class RoomServiceImpl implements RoomService {
     @Override
     public void save(RoomDto roomDto) {
         Room room = new Room();
+        room.setNumber(roomDto.getNumber());
+        room.setRoominess(roomDto.getRoominess());
+        room.setPricePerDay(roomDto.getPricePerDay());
+        room.setHotel(roomDto.getHotel());
+        room.setFree(true);
 
         roomRepository.save(room);
     }

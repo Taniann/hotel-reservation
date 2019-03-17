@@ -40,13 +40,15 @@ public class AdminController {
 
     @RequestMapping(value = {"/addRoom"}, method = RequestMethod.GET)
     public String addRoom(Model model) {
+        model.addAttribute("roomForm", new RoomDto());
         model.addAttribute("hotels", hotelService.findAll());
+
 
         return "admin/addRoom";
     }
 
     @RequestMapping(value = {"/addRoom"}, method = RequestMethod.POST)
-    public String addHotel(@ModelAttribute("hotelForm") RoomDto roomDto, Model model) {
+    public String addHotel(@ModelAttribute("roomForm") RoomDto roomDto, Model model) {
 
         roomService.save(roomDto);
         return "welcome";
